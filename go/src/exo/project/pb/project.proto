@@ -1,0 +1,13 @@
+syntax = "proto3";
+package pb;
+
+message Project {
+  string id = 1;
+  string name = 2;
+}
+
+message ProjectsRequest {}
+
+service ProjectService {
+  rpc AllProjects (ProjectsRequest) returns (stream Project);
+}

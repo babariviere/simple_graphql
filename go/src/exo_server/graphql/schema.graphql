@@ -1,0 +1,14 @@
+type Project {
+  id: ID!
+  name: String!
+}
+
+type User {
+  id: ID!
+  email: String!
+}
+
+type Query {
+  allProjects: [Project!]!
+  allUsers: [User!]!
+}

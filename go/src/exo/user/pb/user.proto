@@ -1,0 +1,13 @@
+syntax = "proto3";
+package pb;
+
+message User {
+  string id = 1;
+  string email = 2;
+}
+
+message UsersRequest {}
+
+service UserService {
+  rpc AllUsers (UsersRequest) returns (stream User);
+}
