@@ -1,7 +1,5 @@
 ## HowTo
 
-You need to source .envrc: `source .envrc`
-
 To launch graphql: `make graphql`
 
 To launch project microservice: `make project`
