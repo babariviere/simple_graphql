@@ -1,4 +1,4 @@
-//go:generate protoc -I $GOPATH/src/exo/user/pb --go_out=plugins=grpc:$GOPATH/src/exo/user/pb $GOPATH/src/exo/user/pb/user.proto
+//go:generate protoc -I ../../user/pb --go_out=plugins=grpc:../../user/pb ../../user/pb/user.proto
 
 package main
 

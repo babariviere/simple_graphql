@@ -3,33 +3,30 @@ build: build and install servers/client in go/bin
 generate: generate go files from graphql and proto
 endef
 
-all: dependencies generate build
+all: generate build test
 
-dependencies:
-	go get exo/...
-	go get exo_server/...
+build: FORCE
+	go build ./...
 
-build:
-	go build exo/...
-	go build exo_server/...
-	go install exo_server/...
+generate: FORCE
+	go generate ./...
 
-generate:
-	go generate exo_server/...
+test: FORCE
+	go test ./...
 
 help:
 	@echo "$(USAGE)"
 
-run: build
-	@./go/bin/server &
-	@./go/bin/project &
-	@./go/bin/user &
+graphql: FORCE
+	@go build -o bin/graphql exo/server/graphql/server
+	@./bin/graphql
 
-graphql: build
-	@./go/bin/server
+project: FORCE
+	@go build -o bin/project exo/server/project
+	@./bin/project
 
-project: build
-	@./go/bin/project
+user: FORCE
+	@go build -o bin/user exo/server/user
+	@./bin/user
 
-user: build
-	@./go/bin/user
+FORCE:

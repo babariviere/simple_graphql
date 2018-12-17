@@ -1,4 +1,4 @@
-//go:generate go run $GOPATH/src/exo_server/scripts/gqlgen.go -v
+//go:generate go run ../../scripts/gqlgen.go -v
 
 package main
 
