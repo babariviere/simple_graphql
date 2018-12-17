@@ -46,6 +46,7 @@ func startServer() error {
 	s := grpc.NewServer()
 	pb.RegisterProjectServiceServer(s, &server{})
 	reflection.Register(s)
+	fmt.Println("listening to :" + port)
 	if err := s.Serve(lis); err != nil {
 		return errors.Wrap(err, "failed to serve")
 	}
