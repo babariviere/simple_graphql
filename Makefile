@@ -11,9 +11,7 @@ dependencies:
 
 build:
 	go build exo/...
-	go build exo_client/...
 	go build exo_server/...
-	go install exo_client/...
 	go install exo_server/...
 
 generate:
@@ -21,3 +19,17 @@ generate:
 
 help:
 	@echo "$(USAGE)"
+
+run: build
+	@./go/bin/server &
+	@./go/bin/project &
+	@./go/bin/user &
+
+graphql: build
+	@./go/bin/server
+
+project: build
+	@./go/bin/project
+
+user: build
+	@./go/bin/user
