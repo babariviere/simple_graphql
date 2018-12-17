@@ -1,7 +1,13 @@
-.PHONY: generate
+define USAGE
+build: build and install servers/client in go/bin
+generate: generate go files from graphql and proto
+endef
 
-USAGE="build: build and install servers/client in go/bin
-generate: generate go files from graphql and proto"
+all: dependencies generate build
+
+dependencies:
+	go get exo/...
+	go get exo_server/...
 
 build:
 	go build exo/...
