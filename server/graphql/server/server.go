@@ -3,7 +3,7 @@
 package main
 
 import (
-	"exo_server/graphql"
+	"exo/server/graphql"
 	"log"
 	"net/http"
 	"os"
