@@ -3,37 +3,41 @@ build: build and install servers/client in go/bin
 generate: generate go files from graphql and proto
 endef
 
+GOPATH=$(shell pwd)
 GODIR=$(GOPATH)/src/exo
 
-all: generate build test
+all: build test
 
-build: FORCE
-	go build ./...
+build: build_graphql build_project build_user
+
+build_graphql: dependencies
+	 go build -o bin/graphql exo/server/graphql/server
+
+build_project: dependencies
+	 go build -o bin/project exo/server/project
+
+build_user: dependencies
+	 go build -o bin/user exo/server/user
+
+dependencies:
+	go get exo/...
 
 generate: FORCE
-	@# Hack to bypass gqlgen modules
-	@if [ ! -d $(GODIR) ]; then mkdir -p $(GODIR); fi
-	# We needs password because we have to bind this directory into gopath
-	@mount | grep $(GODIR) &>/dev/null || sudo mount --bind `pwd` $(GODIR)
-	cd $(GOPATH)/src/exo; go generate ./...
-	@sudo umount $(GODIR)
+	go generate exo/...
 
 test: FORCE
-	go test ./...
+	 go test exo/...
 
 help:
 	@echo "$(USAGE)"
 
-graphql: FORCE
-	@go build -o bin/graphql exo/server/graphql/server
+graphql: build_graphql
 	@./bin/graphql
 
-project: FORCE
-	@go build -o bin/project exo/server/project
+project: build_project
 	@./bin/project
 
-user: FORCE
-	@go build -o bin/user exo/server/user
+user: build_user
 	@./bin/user
 
 FORCE:
