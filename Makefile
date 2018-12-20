@@ -20,12 +20,12 @@ build_user: dependencies
 	 go build -o bin/user exo/server/user
 
 dependencies:
-	go get exo/...
+	go get -d exo/...
 
-generate: FORCE
+generate:
 	go generate exo/...
 
-test: FORCE
+test:
 	 go test exo/...
 
 help:
@@ -39,5 +39,3 @@ project: build_project
 
 user: build_user
 	@./bin/user
-
-FORCE:
